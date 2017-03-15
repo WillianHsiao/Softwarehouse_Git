@@ -1,0 +1,4 @@
+﻿Repository資料夾為放置商業邏輯運算的地方
+命名規則：按照該邏輯名稱取其英文同義字
+例如：取得會員列表(GetMemberListRepository.cs)
+商業邏輯是譬如Table之間的資料要互相作運算以達到預期的功能性需求

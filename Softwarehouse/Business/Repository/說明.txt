@@ -1,0 +1,5 @@
+﻿CRUD拆開來為Create Read Update Delete
+此資料夾放置各個Table的這四個Function
+不能放其他商業邏輯或者不相干之程式碼
+命名規則：按照該資料表的名稱命名
+例如：Table1的新增刪除修改查詢(Table1CURD.cs)
