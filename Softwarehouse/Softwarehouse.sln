@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Busine
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectCollection", "ObjectCollection\ObjectCollection.csproj", "{8B8CCBDB-299F-4532-9528-90505C73EF33}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SoftwarehouseDatabase", "SoftwarehouseDatabase\SoftwarehouseDatabase.sqlproj", "{2A1B7D55-5B95-408E-8AC6-544299967DE0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,12 @@ Global
 		{8B8CCBDB-299F-4532-9528-90505C73EF33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B8CCBDB-299F-4532-9528-90505C73EF33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B8CCBDB-299F-4532-9528-90505C73EF33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A1B7D55-5B95-408E-8AC6-544299967DE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A1B7D55-5B95-408E-8AC6-544299967DE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A1B7D55-5B95-408E-8AC6-544299967DE0}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{2A1B7D55-5B95-408E-8AC6-544299967DE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A1B7D55-5B95-408E-8AC6-544299967DE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A1B7D55-5B95-408E-8AC6-544299967DE0}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
