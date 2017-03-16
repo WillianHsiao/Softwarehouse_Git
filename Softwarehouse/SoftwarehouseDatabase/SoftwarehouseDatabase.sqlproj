@@ -7,7 +7,7 @@
     <Name>SoftwarehouseDatabase</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{2a1b7d55-5b95-408e-8ac6-544299967de0}</ProjectGuid>
+    <ProjectGuid>{15ec72d9-fa25-4d2e-8b7c-9e39bd3a0eca}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
