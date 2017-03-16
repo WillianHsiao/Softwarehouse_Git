@@ -1,13 +1,10 @@
-﻿using Business.Interface;
-using Business.Models.SoftwarehouseDB;
-using ObjectCollection.RepositoryCondition;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Business.Interfaces;
+using Business.Models.SoftwarehouseDB;
+using ObjectCollection.RepositoryConditions;
 
-namespace Business.Repository
+namespace Business.Repositories
 {
     public class MemberRepository : IRepositoryTransaction<ManagerInfoRepoCondition, Member, SoftwarehouseDBModel>
     {

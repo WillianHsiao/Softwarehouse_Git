@@ -1,13 +1,9 @@
-﻿using Business.Interface;
-using ObjectCollection.ServiceCondition;
-using ObjectCollection.ServiceResult;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Business.Interfaces;
+using ObjectCollection.ServiceConditions;
+using ObjectCollection.ServiceResults;
 
-namespace Business.Service
+namespace Business.Services
 {
     public class TestService : IService<TestServiceCondition, TestServiceResult>
     {

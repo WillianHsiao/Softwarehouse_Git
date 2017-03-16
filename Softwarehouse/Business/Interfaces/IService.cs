@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Business.Interface
+﻿namespace Business.Interfaces
 {
     /// <summary>
     /// 商業邏輯運算介面

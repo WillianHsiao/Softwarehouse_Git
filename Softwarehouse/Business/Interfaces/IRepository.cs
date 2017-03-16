@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
-namespace Business.Interface
+namespace Business.Interfaces
 {
     public interface IRepository<TCondition, TSource, TResult, TKey> where TCondition : class
     {
