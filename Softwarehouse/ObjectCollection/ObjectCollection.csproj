@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepositoryConditions\ManagerInfoRepoCondition.cs" />
+    <Compile Include="RepositoryConditions\MemberDataRepoCondition.cs" />
     <Compile Include="ServiceConditions\TestServiceCondition.cs" />
     <Compile Include="ServiceResults\TestServiceResult.cs" />
   </ItemGroup>

@@ -6,7 +6,7 @@ using ObjectCollection.RepositoryConditions;
 
 namespace Business.Repositories
 {
-    public class MemberRepository : IRepositoryTransaction<ManagerInfoRepoCondition, Member, SoftwarehouseDBModel>
+    public class MemberDataRepository : IRepositoryTransaction<MemberDataRepoCondition, MemberData, SoftwarehouseDBModel>
     {
         public SoftwarehouseDBModel Context
         {
@@ -20,7 +20,7 @@ namespace Business.Repositories
             set;
         }
 
-        public int Create(Member content)
+        public int Create(MemberData content)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace Business.Repositories
             }
         }
 
-        public Member Get(int key)
+        public MemberData Get(int key)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace Business.Repositories
             }
         }
 
-        public IQueryable<Member> Read(ManagerInfoRepoCondition condition)
+        public IQueryable<MemberData> Read(MemberDataRepoCondition condition)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace Business.Repositories
             }
         }
 
-        public Member Update(ManagerInfoRepoCondition condition)
+        public MemberData Update(MemberDataRepoCondition condition)
         {
             try
             {
@@ -107,10 +107,7 @@ namespace Business.Repositories
                     State = false;
                     return null;
                 }
-
-                source.Account = condition.Account;
-                source.Password = condition.Password;
-                source.Account = condition.ManagerName;
+                
                 source.UpdateDate = DateTime.Now;
                 db.SaveChanges();
                 State = true;
@@ -123,12 +120,12 @@ namespace Business.Repositories
             }
         }
 
-        public int UpdateAll(ManagerInfoRepoCondition condition)
+        public int UpdateAll(MemberDataRepoCondition condition)
         {
             throw new NotImplementedException();
         }
 
-        public int Delete(ManagerInfoRepoCondition condition)
+        public int Delete(MemberDataRepoCondition condition)
         {
             try
             {

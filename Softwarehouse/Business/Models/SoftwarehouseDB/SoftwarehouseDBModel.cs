@@ -13,7 +13,7 @@ namespace Business.Models.SoftwarehouseDB
         /// <summary>
         /// ManagerInfo
         /// </summary>
-        public virtual DbSet<Member> Member { get; set; }
+        public virtual DbSet<MemberData> Member { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
