@@ -101,7 +101,7 @@ namespace Business.Repositories
                 }
                 else db = new SoftwarehouseDBModel();
 
-                var source = Get(condition.ManagerID);
+                var source = Get(condition.Id);
                 if (source == null)
                 {
                     State = false;
@@ -136,7 +136,7 @@ namespace Business.Repositories
                 }
                 else db = new SoftwarehouseDBModel();
 
-                var source = Get(condition.ManagerID);
+                var source = Get(condition.Id);
                 if (source == null)
                 {
                     State = false;
@@ -146,7 +146,7 @@ namespace Business.Repositories
                 source.IsDelete = true;
                 db.SaveChanges();
                 State = true;
-                return condition.ManagerID;
+                return condition.Id;
             }
             catch (Exception e)
             {
