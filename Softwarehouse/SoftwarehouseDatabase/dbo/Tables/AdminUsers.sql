@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[AdminData]
+﻿CREATE TABLE [dbo].[AdminUsers]
 (
 	[Id] INT           IDENTITY (1, 1) NOT NULL, 
     [Account] NVARCHAR(25) NOT NULL, 

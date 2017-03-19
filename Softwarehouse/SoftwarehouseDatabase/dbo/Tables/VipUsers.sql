@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[VipData]
+﻿CREATE TABLE [dbo].[VipUsers]
 (
 	[Id] INT           IDENTITY (1, 1) NOT NULL, 
     [Account] NVARCHAR(25) NOT NULL, 

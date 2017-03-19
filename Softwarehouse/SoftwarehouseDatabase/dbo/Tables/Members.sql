@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[MemberData] (
+﻿CREATE TABLE [dbo].[Members] (
     [Id]       INT           IDENTITY (1, 1) NOT NULL,
     [Account]     NVARCHAR(25)    NOT NULL,
     [Password] NVARCHAR(MAX) NOT NULL, 
