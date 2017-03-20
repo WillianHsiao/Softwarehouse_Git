@@ -9,9 +9,9 @@ namespace Softwarehouse_BackEnd.Controllers
 {
     public class AdminUserController : Controller
     {
-        private AdminUserRepository _repository;
+        private AdminUsersRepository _repository;
 
-        public AdminUserController(AdminUserRepository repository)
+        public AdminUserController(AdminUsersRepository repository)
         {
             _repository = repository;
         }

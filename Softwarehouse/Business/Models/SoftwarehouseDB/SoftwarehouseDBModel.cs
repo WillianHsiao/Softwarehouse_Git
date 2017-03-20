@@ -11,9 +11,17 @@ namespace Business.Models.SoftwarehouseDB
         }
 
         /// <summary>
-        /// ManagerInfo
+        /// AdminUsers
         /// </summary>
-        public virtual DbSet<AdminUser> AdminUsers { get; set; }
+        public virtual DbSet<AdminUsers> AdminUsers { get; set; }
+        /// <summary>
+        /// VipUsers
+        /// </summary>
+        public virtual DbSet<VipUsers> VipUsers { get; set; }
+        /// <summary>
+        /// Members
+        /// </summary>
+        public virtual DbSet<Members> Members { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

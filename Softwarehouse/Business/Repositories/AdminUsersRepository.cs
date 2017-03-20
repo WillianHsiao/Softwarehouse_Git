@@ -6,8 +6,19 @@ using ObjectCollection.RepositoryConditions;
 
 namespace Business.Repositories
 {
-    public class AdminUserRepository : IRepositoryTransaction<AdminUserRepoCondition, AdminUser, SoftwarehouseDBModel>
+    public class AdminUsersRepository : IRepositoryTransaction<AdminUsersRepoCondition, AdminUsers, SoftwarehouseDBModel>
     {
+        private SoftwarehouseDBModel db;
+
+        public AdminUsersRepository()
+        {
+            if (Context != null)
+            {
+                db = Context;
+            }
+            else db = new SoftwarehouseDBModel();
+        }
+
         public SoftwarehouseDBModel Context
         {
             get;
@@ -20,17 +31,10 @@ namespace Business.Repositories
             set;
         }
 
-        public int Create(AdminUser content)
+        public int Create(AdminUsers content)
         {
             try
             {
-                SoftwarehouseDBModel db;
-                if (Context != null)
-                {
-                    db = Context;
-                }
-                else db = new SoftwarehouseDBModel();
-
                 var result = db.AdminUsers.Add(content);
                 State = true;
                 return result.Id;
@@ -42,16 +46,10 @@ namespace Business.Repositories
             }
         }
 
-        public AdminUser Get(int key)
+        public AdminUsers Get(int key)
         {
             try
             {
-                SoftwarehouseDBModel db;
-                if (Context != null)
-                {
-                    db = Context;
-                }
-                else db = new SoftwarehouseDBModel();
                 var result = from t in db.AdminUsers
                              where t.Id == key
                              select t;
@@ -65,17 +63,10 @@ namespace Business.Repositories
             }
         }
 
-        public IQueryable<AdminUser> Read(AdminUserRepoCondition condition)
+        public IQueryable<AdminUsers> Read(AdminUsersRepoCondition condition)
         {
             try
             {
-                SoftwarehouseDBModel db;
-                if (Context != null)
-                {
-                    db = Context;
-                }
-                else db = new SoftwarehouseDBModel();
-
                 var result = from t in db.AdminUsers
                              select t;
                 State = true;
@@ -88,23 +79,19 @@ namespace Business.Repositories
             }
         }
 
-        public AdminUser Update(AdminUserRepoCondition condition)
+        public AdminUsers Update(AdminUsersRepoCondition condition)
         {
             try
             {
-                SoftwarehouseDBModel db;
-                if (Context != null)
-                {
-                    db = Context;
-                }
-                else db = new SoftwarehouseDBModel();
-
                 var source = Get(condition.Id);
                 if (source == null)
                 {
                     State = false;
                     return null;
                 }
+                source.Account = condition.Account;
+                source.Password = condition.Password;
+                source.Email = condition.Email;
                 
                 db.SaveChanges();
                 State = true;
@@ -117,22 +104,15 @@ namespace Business.Repositories
             }
         }
 
-        public int UpdateAll(AdminUserRepoCondition condition)
+        public int UpdateAll(AdminUsersRepoCondition condition)
         {
             throw new NotImplementedException();
         }
 
-        public int Delete(AdminUserRepoCondition condition)
+        public int Delete(AdminUsersRepoCondition condition)
         {
             try
             {
-                SoftwarehouseDBModel db;
-                if (Context != null)
-                {
-                    db = Context;
-                }
-                else db = new SoftwarehouseDBModel();
-
                 var source = Get(condition.Id);
                 if (source == null)
                 {

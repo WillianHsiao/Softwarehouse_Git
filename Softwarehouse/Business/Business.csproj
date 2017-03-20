@@ -52,14 +52,15 @@
   <ItemGroup>
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IService.cs" />
-    <Compile Include="Models\SoftwarehouseDB\AdminUser.cs" />
+    <Compile Include="Models\SoftwarehouseDB\AdminUsers.cs" />
     <Compile Include="Models\SoftwarehouseDB\SoftwarehouseDBModel.cs" />
     <Compile Include="Models\SoftwarehouseDB\SoftwarehouseDBSPModel.cs" />
-    <Compile Include="Models\SoftwarehouseDB\MemberData.cs" />
-    <Compile Include="Models\SoftwarehouseDB\UserAccount.cs" />
-    <Compile Include="Models\SoftwarehouseDB\VipData.cs" />
+    <Compile Include="Models\SoftwarehouseDB\Members.cs" />
+    <Compile Include="Models\SoftwarehouseDB\VipUsers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\AdminUserRepository.cs" />
+    <Compile Include="Repositories\AdminUsersRepository.cs" />
+    <Compile Include="Repositories\MembersRepository.cs" />
+    <Compile Include="Repositories\VipUsersRepository.cs" />
     <Compile Include="Services\TestService.cs" />
   </ItemGroup>
   <ItemGroup>

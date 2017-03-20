@@ -37,7 +37,7 @@ namespace Softwarehouse_BackEnd.App_Start
 
             // TODO: Register your types here
             // container.RegisterType<IProductRepository, ProductRepository>();
-            container.RegisterInstance(typeof(AdminUserRepository), new AdminUserRepository());
+            container.RegisterInstance(typeof(AdminUsersRepository), new AdminUsersRepository());
         }
     }
 }

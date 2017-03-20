@@ -1,11 +1,20 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Business.Models.SoftwarehouseDB
 {
-    [Table("AdminUsers")]
-    public class AdminUser
+    [Table("VipData")]
+    public class VipUsers
     {
+        public VipUsers()
+        {
+
+        }
         [Key]
         [Column("Id")]
         public int Id { get; set; }
