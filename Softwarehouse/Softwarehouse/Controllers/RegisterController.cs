@@ -1,4 +1,5 @@
 ﻿using Business.Repositories;
+using Softwarehouse.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +19,13 @@ namespace Softwarehouse.Controllers
         {
             _repository = repository;
         }
+
+        [AllowAnonymous]
         // GET: Register
         public ActionResult Index()
         {
-            return View();
+            var model = new RegisterViewModel();
+            return View(model);
         }
     }
 }

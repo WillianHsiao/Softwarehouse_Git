@@ -141,13 +141,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\assets\demo.css" />
+    <Content Include="Content\assets\form-basic.css" />
+    <Content Include="Content\assets\form-labels-on-top.css" />
+    <Content Include="Content\assets\form-login.css" />
+    <Content Include="Content\assets\form-mini.css" />
+    <Content Include="Content\assets\form-register.css" />
+    <Content Include="Content\assets\form-search.css" />
+    <Content Include="Content\assets\form-validation.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\angular.min.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

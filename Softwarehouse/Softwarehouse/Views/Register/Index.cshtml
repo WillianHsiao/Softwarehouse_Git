@@ -1,7 +1,60 @@
 ﻿@model Softwarehouse.ViewModels.RegisterViewModel
-@{
-    ViewBag.Title = "Index";
-}
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="~/Content/assets/demo.css">
+    <link rel="stylesheet" href="~/Content/assets/form-register.css">
+    <script>
+        var app = angulear.model('RegisterApp', []);
+        
+    </script>
+</head>
 
-<h2>Index</h2>
-
+<div class="main-content" ng-app>
+    <!-- You only need this form and the form-register.css -->
+    <form class="form-register" method="post" action="#">
+        <div class="form-register-with-email">
+            <div class="form-white-background">
+                <div class="form-title-row">
+                    <h1>免費註冊</h1>
+                </div>
+                <div class="form-row">
+                    <label>
+                        <span>姓名</span>
+                        <input type="text" name="name" ng-model="Name">
+                    </label>
+                </div>
+                <div class="form-row">
+                    <label>
+                        <span>Email</span>
+                        <input type="email" name="email" ng-model="Email">
+                    </label>
+                </div>
+                <div class="form-row">
+                    <label>
+                        <span>密碼</span>
+                        <input type="password" name="password" ng-model="Password">
+                    </label>
+                </div>
+                <div class="form-row">
+                    <label>
+                        <span>確認密碼</span>
+                        <input type="password" name="confirmpassword" ng-model="ConfirmPassword">
+                    </label>
+                </div>
+                <div class="form-row">
+                    <label class="form-checkbox">
+                        <input type="checkbox" name="checkbox" checked>
+                        <span>I agree to the <a href="#">terms and conditions</a></span>
+                    </label>
+                </div>
+                <div class="form-row">
+                    <button type="submit">註冊</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
