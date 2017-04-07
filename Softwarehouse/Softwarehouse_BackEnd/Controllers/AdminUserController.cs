@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Business.Repositories;
+using ObjectCollection.RepositoryConditions;
 
 namespace Softwarehouse_BackEnd.Controllers
 {
@@ -16,10 +13,36 @@ namespace Softwarehouse_BackEnd.Controllers
             _repository = repository;
         }
 
-        // GET: User
-        public ActionResult Index()
+        public ActionResult Index(AdminUsersRepoCondition condition)
         {
-            var t = _repository.Get(1);
+            var adminUsers = _repository.Read(condition);
+            return View(adminUsers);
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(FormCollection fc)
+        {
+            return View();
+        }
+
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Edit(FormCollection fc)
+        {
+            return View();
+        }
+
+        public ActionResult Delete(int)
+        {
             return View();
         }
     }

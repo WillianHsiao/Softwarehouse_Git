@@ -153,6 +153,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminUser\CreateAdminUserRequest.cs" />
+    <Compile Include="Models\AdminUser\EditAdminUserRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -172,7 +174,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +183,14 @@
     <ProjectReference Include="..\Business\Business.csproj">
       <Project>{0a8f5a39-4359-429f-8d09-205dd4631270}</Project>
       <Name>Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectCollection\ObjectCollection.csproj">
+      <Project>{8B8CCBDB-299F-4532-9528-90505C73EF33}</Project>
+      <Name>ObjectCollection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Security\Security.csproj">
+      <Project>{d39785f0-9f20-4154-a5db-75a43919d4ac}</Project>
+      <Name>Security</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
