@@ -8,14 +8,16 @@
     <link rel="stylesheet" href="~/Content/assets/demo.css">
     <link rel="stylesheet" href="~/Content/assets/form-register.css">
     <script>
-        var app = angulear.model('RegisterApp', []);
-        
+        var RegisterApp = angulear.model('RegisterApp', []);
+        RegisterApp.controller('RegisterController', function ($scope, $window) {
+
+        });
     </script>
 </head>
 
-<div class="main-content" ng-app>
+<div class="main-content" ng-app="RegisterApp">
     <!-- You only need this form and the form-register.css -->
-    <form class="form-register" method="post" action="#">
+    <form class="form-register" name="FormRegister" method="post" action="@Url.Action("Register")">
         <div class="form-register-with-email">
             <div class="form-white-background">
                 <div class="form-title-row">
@@ -24,25 +26,25 @@
                 <div class="form-row">
                     <label>
                         <span>姓名</span>
-                        <input type="text" name="name" ng-model="Name">
+                        <input type="text" name="Name" ng-model="Name" required>
                     </label>
                 </div>
                 <div class="form-row">
                     <label>
                         <span>Email</span>
-                        <input type="email" name="email" ng-model="Email">
+                        <input type="email" name="Email" ng-model="Email" required>
                     </label>
                 </div>
                 <div class="form-row">
                     <label>
                         <span>密碼</span>
-                        <input type="password" name="password" ng-model="Password">
+                        <input type="password" name="Password" ng-model="Password" required>
                     </label>
                 </div>
                 <div class="form-row">
                     <label>
                         <span>確認密碼</span>
-                        <input type="password" name="confirmpassword" ng-model="ConfirmPassword">
+                        <input type="password" name="ConfirmPassword" ng-model="ConfirmPassword" required>
                     </label>
                 </div>
                 <div class="form-row">

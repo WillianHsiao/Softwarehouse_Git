@@ -27,5 +27,10 @@ namespace Softwarehouse.Controllers
             var model = new RegisterViewModel();
             return View(model);
         }
+
+        public ActionResult Register(RegisterViewModel model)
+        {
+            return Content("");
+        }
     }
 }
