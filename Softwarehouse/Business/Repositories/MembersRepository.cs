@@ -39,6 +39,7 @@ namespace Business.Repositories
             try
             {
                 var result = db.Members.Add(content);
+                db.SaveChanges();
                 State = true;
                 return result.Id;
             }
@@ -72,6 +73,18 @@ namespace Business.Repositories
             {
                 var result = from t in db.Members
                              select t;
+                if (!string.IsNullOrWhiteSpace(condition.Account))
+                {
+                    result = result.Where(r => r.Account == condition.Account);
+                }
+                if (!string.IsNullOrWhiteSpace(condition.Email))
+                {
+                    result = result.Where(r => r.Email == condition.Email);
+                }
+                if (!string.IsNullOrWhiteSpace(condition.Password))
+                {
+                    result = result.Where(r => r.Password.Contains(condition.Password));
+                }
                 State = true;
                 return result;
             }

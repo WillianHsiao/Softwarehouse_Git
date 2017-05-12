@@ -8,9 +8,14 @@
     <link rel="stylesheet" href="~/Content/assets/demo.css">
     <link rel="stylesheet" href="~/Content/assets/form-register.css">
     <script>
-        var RegisterApp = angulear.model('RegisterApp', []);
+        var RegisterApp = angular.model('RegisterApp', []);
         RegisterApp.controller('RegisterController', function ($scope, $window) {
 
+        });
+        $(document).ready(function () {
+            $('#Account').change(function () {
+                debugger;
+            });
         });
     </script>
 </head>
@@ -25,25 +30,31 @@
                 </div>
                 <div class="form-row">
                     <label>
-                        <span>姓名</span>
+                        <span>@Html.LabelFor(m=>m.Account)</span>
+                        <input type="text" id="Account" name="Account" ng-model="Account" required>
+                    </label>
+                </div>
+                <div class="form-row">
+                    <label>
+                        <span>@Html.LabelFor(m => m.Name)</span>
                         <input type="text" name="Name" ng-model="Name" required>
                     </label>
                 </div>
                 <div class="form-row">
                     <label>
-                        <span>Email</span>
+                        <span>@Html.LabelFor(m => m.Email)</span>
                         <input type="email" name="Email" ng-model="Email" required>
                     </label>
                 </div>
                 <div class="form-row">
                     <label>
-                        <span>密碼</span>
+                        <span>@Html.LabelFor(m => m.Password)</span>
                         <input type="password" name="Password" ng-model="Password" required>
                     </label>
                 </div>
                 <div class="form-row">
                     <label>
-                        <span>確認密碼</span>
+                        <span>@Html.LabelFor(m => m.ConfirmPassword)</span>
                         <input type="password" name="ConfirmPassword" ng-model="ConfirmPassword" required>
                     </label>
                 </div>

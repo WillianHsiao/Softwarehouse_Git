@@ -215,6 +215,10 @@
       <Project>{0A8F5A39-4359-429F-8D09-205DD4631270}</Project>
       <Name>Business</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ObjectCollection\ObjectCollection.csproj">
+      <Project>{8B8CCBDB-299F-4532-9528-90505C73EF33}</Project>
+      <Name>ObjectCollection</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

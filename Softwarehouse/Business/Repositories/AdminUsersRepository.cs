@@ -37,6 +37,7 @@ namespace Business.Repositories
             {
                 var result = db.AdminUsers.Add(content);
                 State = true;
+                db.SaveChanges();
                 return result.Id;
             }
             catch (Exception e)
