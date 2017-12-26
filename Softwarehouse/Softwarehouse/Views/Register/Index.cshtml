@@ -1,4 +1,7 @@
 ﻿@model Softwarehouse.ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = "註冊帳號";
+}
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -8,19 +11,25 @@
     <link rel="stylesheet" href="~/Content/assets/demo.css">
     <link rel="stylesheet" href="~/Content/assets/form-register.css">
     <script>
-        var RegisterApp = angular.model('RegisterApp', []);
-        RegisterApp.controller('RegisterController', function ($scope, $window) {
-
-        });
         $(document).ready(function () {
             $('#Account').change(function () {
-                debugger;
+                $.ajax({
+                    url: '@Url.Action("CheckAccountIsRepeated", "Register")',
+                    type: 'Post',
+                    data: { account: $('#Account').val() },
+                    success: function (result) {
+                        if (result === 'True') {
+                            $('#Account').val("");
+                            alert('帳號已被使用');
+                        }
+                    }
+                });
             });
         });
     </script>
 </head>
 
-<div class="main-content" ng-app="RegisterApp">
+<div class="main-content">
     <!-- You only need this form and the form-register.css -->
     <form class="form-register" name="FormRegister" method="post" action="@Url.Action("Register")">
         <div class="form-register-with-email">
@@ -31,31 +40,36 @@
                 <div class="form-row">
                     <label>
                         <span>@Html.LabelFor(m=>m.Account)</span>
-                        <input type="text" id="Account" name="Account" ng-model="Account" required>
+                        @Html.EditorFor(m=>m.Account)
+                        @Html.ValidationMessageFor(m => m.Account)
                     </label>
                 </div>
                 <div class="form-row">
                     <label>
                         <span>@Html.LabelFor(m => m.Name)</span>
-                        <input type="text" name="Name" ng-model="Name" required>
+                        @Html.EditorFor(m=>m.Name)
+                        @Html.ValidationMessageFor(m=>m.Name)
                     </label>
                 </div>
                 <div class="form-row">
                     <label>
                         <span>@Html.LabelFor(m => m.Email)</span>
-                        <input type="email" name="Email" ng-model="Email" required>
+                        @Html.EditorFor(m=>m.Email)
+                        @Html.ValidationMessageFor(m=>m.Email)
                     </label>
                 </div>
                 <div class="form-row">
                     <label>
                         <span>@Html.LabelFor(m => m.Password)</span>
-                        <input type="password" name="Password" ng-model="Password" required>
+                        @Html.EditorFor(m=>m.Password)
+                        @Html.ValidationMessageFor(m=>m.Password)
                     </label>
                 </div>
                 <div class="form-row">
                     <label>
                         <span>@Html.LabelFor(m => m.ConfirmPassword)</span>
-                        <input type="password" name="ConfirmPassword" ng-model="ConfirmPassword" required>
+                        @Html.EditorFor(m=>m.ConfirmPassword)
+                        @Html.ValidationMessageFor(m=>m.ConfirmPassword)
                     </label>
                 </div>
                 <div class="form-row">

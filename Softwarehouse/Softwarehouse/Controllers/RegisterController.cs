@@ -53,7 +53,7 @@ namespace Softwarehouse.Controllers
         /// </summary>
         /// <param name="account"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         public ActionResult CheckAccountIsRepeated(string account)
         {
             var isRepeated = _repository.Read(new MembersRepoCondition
