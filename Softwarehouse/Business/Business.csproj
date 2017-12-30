@@ -61,6 +61,8 @@
     <Compile Include="Repositories\AdminUsersRepository.cs" />
     <Compile Include="Repositories\MembersRepository.cs" />
     <Compile Include="Repositories\VipUsersRepository.cs" />
+    <Compile Include="Services\MemberAccountRepeatService.cs" />
+    <Compile Include="Services\CreateMemberService.cs" />
     <Compile Include="Services\TestService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -71,6 +73,10 @@
     <ProjectReference Include="..\ObjectCollection\ObjectCollection.csproj">
       <Project>{8b8ccbdb-299f-4532-9528-90505c73ef33}</Project>
       <Name>ObjectCollection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Security\Security.csproj">
+      <Project>{D39785F0-9F20-4154-A5DB-75A43919D4AC}</Project>
+      <Name>Security</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

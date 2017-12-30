@@ -28,5 +28,8 @@ namespace Business.Models.SoftwarehouseDB
 
         [Column("Email")]
         public string Email { get; set; }
+
+        [Column("SaltString")]
+        public string SaltString { get; set; }
     }
 }

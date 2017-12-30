@@ -41,7 +41,7 @@ namespace Softwarehouse_BackEnd.Controllers
             return View();
         }
 
-        public ActionResult Delete(int)
+        public ActionResult Delete(int Id)
         {
             return View();
         }

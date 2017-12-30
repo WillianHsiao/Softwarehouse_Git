@@ -12,15 +12,15 @@
     <link rel="stylesheet" href="~/Content/assets/form-register.css">
     <script>
         $(document).ready(function () {
-            $('#Account').change(function () {
+            $('#btnRegister').click(function () {
                 $.ajax({
-                    url: '@Url.Action("CheckAccountIsRepeated", "Register")',
+                    url: '../api/register/MemberRegister',
                     type: 'Post',
-                    data: { account: $('#Account').val() },
-                    success: function (result) {
-                        if (result === 'True') {
-                            $('#Account').val("");
-                            alert('帳號已被使用');
+                    data: $("form[name*='FormRegister']").serialize(),
+                    success: function (serviceResult) {
+                        if (serviceResult.Result) {
+                            alert('註冊成功!');
+                            
                         }
                     }
                 });
@@ -31,7 +31,7 @@
 
 <div class="main-content">
     <!-- You only need this form and the form-register.css -->
-    <form class="form-register" name="FormRegister" method="post" action="@Url.Action("Register")">
+    <form class="form-register" name="FormRegister">
         <div class="form-register-with-email">
             <div class="form-white-background">
                 <div class="form-title-row">
@@ -78,8 +78,8 @@
                         <span>I agree to the <a href="#">terms and conditions</a></span>
                     </label>
                 </div>
-                <div class="form-row">
-                    <button type="submit">註冊</button>
+                <div class="form-row" style="text-align:center">
+                    <input type="button" id="btnRegister" value="註冊"/>
                 </div>
             </div>
         </div>
