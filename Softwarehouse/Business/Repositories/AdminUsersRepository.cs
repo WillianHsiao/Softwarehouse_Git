@@ -6,7 +6,7 @@ using ObjectCollection.RepositoryConditions;
 
 namespace Business.Repositories
 {
-    public class AdminUsersRepository : IRepositoryTransaction<AdminUsersRepoCondition, AdminUsers, SoftwarehouseDBModel>
+    public class AdminUsersRepository : IRepositoryTransaction<AdminUsersRepoCondition, AdminUsers, SoftwarehouseDBModel>, IDisposable
     {
         private SoftwarehouseDBModel db;
 
@@ -43,7 +43,7 @@ namespace Business.Repositories
             catch (Exception e)
             {
                 State = false;
-                return 0;
+                throw e;
             }
         }
 
@@ -60,7 +60,7 @@ namespace Business.Repositories
             catch (Exception e)
             {
                 State = false;
-                return null;
+                throw e;
             }
         }
 
@@ -76,7 +76,7 @@ namespace Business.Repositories
             catch (Exception e)
             {
                 State = false;
-                return null;
+                throw e;
             }
         }
 
@@ -98,10 +98,10 @@ namespace Business.Repositories
                 State = true;
                 return source;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
                 State = false;
-                return null;
+                throw e;
             }
         }
 
@@ -128,7 +128,16 @@ namespace Business.Repositories
             catch (Exception e)
             {
                 State = false;
-                return 0;
+                throw e;
+            }
+        }
+
+        public void Dispose()
+        {
+            if (db != null)
+            {
+                db.Dispose();
+                db = null;
             }
         }
     }

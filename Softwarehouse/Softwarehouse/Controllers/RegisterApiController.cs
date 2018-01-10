@@ -19,12 +19,14 @@ namespace Softwarehouse.Controllers
         public CreateMemberServiceResult MemberRegister([FromBody]RegisterViewModel model)
         {
             CreateMemberServiceResult result;
-            CreateMemberService service = new CreateMemberService();
-            service.Resources = new CreateMemberServiceCondition
+            CreateMemberService service = new CreateMemberService
             {
-                Account = model.Account,
-                Password = model.Password,
-                Email = model.Email
+                Resources = new CreateMemberServiceCondition
+                {
+                    Account = model.Account,
+                    Password = model.Password,
+                    Email = model.Email
+                }
             };
             if (service.Check())
             {
@@ -32,9 +34,11 @@ namespace Softwarehouse.Controllers
             }
             else
             {
-                result = new CreateMemberServiceResult();
-                result.Result = service.State;
-                result.ErrorMessage = service.StateMessage;
+                result = new CreateMemberServiceResult
+                {
+                    Result = service.State,
+                    ErrorMessage = service.StateMessage
+                };
             }
             return result;
         }

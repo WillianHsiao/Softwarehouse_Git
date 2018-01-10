@@ -7,3 +7,11 @@
     CONSTRAINT [PK_Members] PRIMARY KEY ([Id])
 );
 
+
+GO
+
+CREATE UNIQUE INDEX [IX_Members_Account] ON [dbo].[Members] ([Account])
+
+GO
+
+CREATE UNIQUE INDEX [IX_Members_Email] ON [dbo].[Members] ([Email])

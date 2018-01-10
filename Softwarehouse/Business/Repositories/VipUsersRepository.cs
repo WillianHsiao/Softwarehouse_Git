@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Business.Repositories
 {
-    public class VipUsersRepository : IRepositoryTransaction<VipUsersRepoCondition, VipUsers, SoftwarehouseDBModel>
+    public class VipUsersRepository : IRepositoryTransaction<VipUsersRepoCondition, VipUsers, SoftwarehouseDBModel>, IDisposable
     {
         private SoftwarehouseDBModel db;
 
@@ -43,7 +43,7 @@ namespace Business.Repositories
             catch (Exception e)
             {
                 State = false;
-                return 0;
+                throw e;
             }
         }
 
@@ -65,7 +65,7 @@ namespace Business.Repositories
             catch (Exception e)
             {
                 State = false;
-                return 0;
+                throw e;
             }
         }
 
@@ -82,7 +82,7 @@ namespace Business.Repositories
             catch (Exception e)
             {
                 State = false;
-                return null;
+                throw e;
             }
         }
 
@@ -98,7 +98,7 @@ namespace Business.Repositories
             catch (Exception e)
             {
                 State = false;
-                return null;
+                throw e;
             }
             throw new NotImplementedException();
         }
@@ -121,16 +121,26 @@ namespace Business.Repositories
                 State = true;
                 return source;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
                 State = false;
-                return null;
+                throw e;
             }
         }
 
         public int UpdateAll(VipUsersRepoCondition condition)
         {
             throw new NotImplementedException();
+        }
+
+
+        public void Dispose()
+        {
+            if (db != null)
+            {
+                db.Dispose();
+                db = null;
+            }
         }
     }
 }

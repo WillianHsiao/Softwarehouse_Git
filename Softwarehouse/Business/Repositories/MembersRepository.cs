@@ -2,14 +2,11 @@
 using Business.Models.SoftwarehouseDB;
 using ObjectCollection.RepositoryConditions;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Repositories
 {
-    public class MembersRepository : IRepositoryTransaction<MembersRepoCondition, Members, SoftwarehouseDBModel>
+    public class MembersRepository : IRepositoryTransaction<MembersRepoCondition, Members, SoftwarehouseDBModel>, IDisposable
     {
         private SoftwarehouseDBModel db;
 
@@ -46,7 +43,7 @@ namespace Business.Repositories
             catch (Exception e)
             {
                 State = false;
-                return 0;
+                throw e;
             }
         }
 
@@ -63,7 +60,7 @@ namespace Business.Repositories
             catch (Exception e)
             {
                 State = false;
-                return null;
+                throw e;
             }
         }
 
@@ -91,7 +88,7 @@ namespace Business.Repositories
             catch (Exception e)
             {
                 State = false;
-                return null;
+                throw e;
             }
         }
 
@@ -113,10 +110,10 @@ namespace Business.Repositories
                 State = true;
                 return source;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
                 State = false;
-                return null;
+                throw e;
             }
         }
 
@@ -143,7 +140,16 @@ namespace Business.Repositories
             catch (Exception e)
             {
                 State = false;
-                return 0;
+                throw e;
+            }
+        }
+
+        public void Dispose()
+        {
+            if (db != null)
+            {
+                db.Dispose();
+                db = null;
             }
         }
     }

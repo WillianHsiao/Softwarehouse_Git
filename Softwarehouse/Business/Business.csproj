@@ -63,7 +63,7 @@
     <Compile Include="Repositories\VipUsersRepository.cs" />
     <Compile Include="Services\MemberAccountRepeatService.cs" />
     <Compile Include="Services\CreateMemberService.cs" />
-    <Compile Include="Services\TestService.cs" />
+    <Compile Include="Services\MemberLoginService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

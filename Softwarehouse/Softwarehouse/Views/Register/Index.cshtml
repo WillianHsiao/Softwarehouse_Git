@@ -20,7 +20,9 @@
                     success: function (serviceResult) {
                         if (serviceResult.Result) {
                             alert('註冊成功!');
-                            
+                        }
+                        else {
+                            alert(serviceResult.ErrorMessage);
                         }
                     }
                 });

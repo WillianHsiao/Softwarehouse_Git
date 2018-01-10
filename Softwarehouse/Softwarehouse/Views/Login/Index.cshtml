@@ -1,7 +1,28 @@
-﻿
+﻿@model Softwarehouse.ViewModels.LoginViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "登入";
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
+    <link rel="stylesheet" href="~/Content/login/css/style.css">
 
-<h2>Index</h2>
+</head>
+<body>
+    <div class="login-card">
+        <h1>登入</h1><br>
+        <form>
+            <input type="text" name="user" placeholder="帳號">
+            <input type="password" name="pass" placeholder="密碼">
+            <input type="submit" name="login" class="login login-submit" value="登入">
+        </form>
 
+        <div class="login-help">
+            <a href="@Url.Action("Index", "Register")">註冊</a> • <a href="#">忘記密碼</a>
+        </div>
+    </div>
+
+</body>
+</html>
