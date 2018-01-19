@@ -1,5 +1,6 @@
 ﻿using Business.Interfaces;
 using Business.Repositories;
+using Common.Enums;
 using ObjectCollection.RepositoryConditions;
 using ObjectCollection.ServiceConditions;
 using ObjectCollection.ServiceResults;
@@ -28,11 +29,6 @@ namespace Business.Services
         {
             get;
             set;
-        }
-
-        public bool Login(object account, object password)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -89,21 +85,24 @@ namespace Business.Services
                 if(member == null)
                 {
                     result.Result = false;
-                    result.ErrorMessage = "查無此帳號";
+                    result.LoginResult = LoginResultEnum.AccountNotFound;
+                    result.ErrorMessage = "";
                 }
                 else
                 {
                     if(member.Password != encrypt.EncryptSHA512(_Resource.Password, member.SaltString))
                     {
                         result.Result = false;
-                        result.ErrorMessage = "密碼錯誤";
+                        result.LoginResult = LoginResultEnum.PasswordError;
+                        result.ErrorMessage = "";
                     }
                 }
             }
             catch(Exception ex)
             {
                 result.Result = false;
-                result.ErrorMessage = "登入失敗";
+                result.LoginResult = LoginResultEnum.UnKnowFail;
+                result.ErrorMessage = ex.Message;
             }
             return result;
         }

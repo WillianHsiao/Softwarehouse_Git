@@ -63,6 +63,7 @@
     <Compile Include="Repositories\VipUsersRepository.cs" />
     <Compile Include="Services\MemberAccountRepeatService.cs" />
     <Compile Include="Services\CreateMemberService.cs" />
+    <Compile Include="Services\MemberEmailRepeatService.cs" />
     <Compile Include="Services\MemberLoginService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +71,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{d5564db3-29b9-4642-9d66-59253a368b25}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ObjectCollection\ObjectCollection.csproj">
       <Project>{8b8ccbdb-299f-4532-9528-90505c73ef33}</Project>
       <Name>ObjectCollection</Name>

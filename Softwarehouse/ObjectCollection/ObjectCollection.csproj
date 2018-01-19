@@ -47,9 +47,19 @@
     <Compile Include="RepositoryConditions\MembersRepoCondition.cs" />
     <Compile Include="RepositoryConditions\VipUsersRepoCondition.cs" />
     <Compile Include="ServiceConditions\CreateMemberServiceCondition.cs" />
+    <Compile Include="ServiceConditions\MemberAccountRepeatServiceCondition.cs" />
+    <Compile Include="ServiceConditions\MemberEmailRepeatServiceCondition.cs" />
     <Compile Include="ServiceConditions\MemberLoginServiceCondition.cs" />
     <Compile Include="ServiceResults\CreateMemberServiceResult.cs" />
+    <Compile Include="ServiceResults\MemberAccountRepeatServiceResult.cs" />
+    <Compile Include="ServiceResults\MemberEmailRepeatServiceResult.cs" />
     <Compile Include="ServiceResults\MemberLoginServiceResult.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{d5564db3-29b9-4642-9d66-59253a368b25}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

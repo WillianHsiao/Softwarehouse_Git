@@ -7,83 +7,173 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Registration Form</title>
-    <link rel="stylesheet" href="~/Content/assets/demo.css">
-    <link rel="stylesheet" href="~/Content/assets/form-register.css">
+    <title>@ViewBag.Title</title>
     <script>
         $(document).ready(function () {
-            $('#btnRegister').click(function () {
-                $.ajax({
-                    url: '../api/register/MemberRegister',
-                    type: 'Post',
-                    data: $("form[name*='FormRegister']").serialize(),
-                    success: function (serviceResult) {
-                        if (serviceResult.Result) {
-                            alert('註冊成功!');
+            var validator = $("#FormRegister").validate({
+                rules: {
+                    Account: {
+                        required: true,
+                        remote: {
+                            url: "@Url.Action("MemberAccountRepeat", "Register")",
+                            type: "Get",
+                            data: {
+                                Account: function () {
+                                    return $("#Account").val();
+                                }
+                            }
                         }
-                        else {
-                            alert(serviceResult.ErrorMessage);
+                    },
+                    Name: { required: true },
+                    Email: {
+                        required: true,
+                        email: true,
+                        remote: {
+                            url: '@Url.Action("MemberEmailRepeat", "Register")',
+                            type: 'Get',
+                            data: {
+                                Email: function () {
+                                    return $("#Email").val();
+                                }
+                            }
                         }
+                    },
+                    Password: { required: true },
+                    ConfirmPassword: {
+                        required: true,
+                        equalTo: "#Password"
+                    },
+                    agree: { required: true }
+                },
+                messages: {
+                    Account: {
+                        remote: "帳號重複"
+                    },
+                    Email: {
+                        remote: "電子信箱重複"
+                    },
+                    ConfirmPassword: {
+                        equalTo:"與密碼不相符"
+                    },
+                    agree:"請同意我們的隱私權政策"
+                },
+                errorElement: "em",
+                errorPlacement: function (error, element) {
+                    // Add the `help-block` class to the error element
+                    error.addClass("help-block");
+
+                    if (element.prop("type") === "checkbox") {
+                        error.insertAfter(element.parent("label"));
+                    } else {
+                        error.insertAfter(element);
                     }
-                });
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).parents(".col-sm-5").addClass("has-error").removeClass("has-success");
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).parents(".col-sm-5").addClass("has-success").removeClass("has-error");
+                }
+            });
+            $('#btnRegister').click(function () {
+                if ($("#FormRegister").valid()) {
+                    $.ajax({
+                        url: '../api/register/MemberRegister',
+                        type: 'Post',
+                        data: $("#FormRegister").serialize(),
+                        success: function (serviceResult) {
+                            if (serviceResult.Result) {
+                                alert('註冊成功!');
+                            }
+                            else {
+                                alert(serviceResult.ErrorMessage);
+                            }
+                        }
+                    });
+                }
             });
         });
+
+        function ShowPrivacyPolicy() {
+            BootstrapDialog.show({
+                size: BootstrapDialog.SIZE_WIDE,
+                title:"隱私權政策",
+                message: $('<div></div>').load('@Url.Action("PrivacyPolicy", "Register")'),
+                buttons: [
+                {
+                    label: '關閉',
+                    action: function (dialogItself) {
+                        dialogItself.close();
+                    }
+                }]
+            });
+        }
     </script>
 </head>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
 
-<div class="main-content">
-    <!-- You only need this form and the form-register.css -->
-    <form class="form-register" name="FormRegister">
-        <div class="form-register-with-email">
-            <div class="form-white-background">
-                <div class="form-title-row">
-                    <h1>免費註冊</h1>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">免費註冊</h3>
                 </div>
-                <div class="form-row">
-                    <label>
-                        <span>@Html.LabelFor(m=>m.Account)</span>
-                        @Html.EditorFor(m=>m.Account)
-                        @Html.ValidationMessageFor(m => m.Account)
-                    </label>
-                </div>
-                <div class="form-row">
-                    <label>
-                        <span>@Html.LabelFor(m => m.Name)</span>
-                        @Html.EditorFor(m=>m.Name)
-                        @Html.ValidationMessageFor(m=>m.Name)
-                    </label>
-                </div>
-                <div class="form-row">
-                    <label>
-                        <span>@Html.LabelFor(m => m.Email)</span>
-                        @Html.EditorFor(m=>m.Email)
-                        @Html.ValidationMessageFor(m=>m.Email)
-                    </label>
-                </div>
-                <div class="form-row">
-                    <label>
-                        <span>@Html.LabelFor(m => m.Password)</span>
-                        @Html.EditorFor(m=>m.Password)
-                        @Html.ValidationMessageFor(m=>m.Password)
-                    </label>
-                </div>
-                <div class="form-row">
-                    <label>
-                        <span>@Html.LabelFor(m => m.ConfirmPassword)</span>
-                        @Html.EditorFor(m=>m.ConfirmPassword)
-                        @Html.ValidationMessageFor(m=>m.ConfirmPassword)
-                    </label>
-                </div>
-                <div class="form-row">
-                    <label class="form-checkbox">
-                        <input type="checkbox" name="checkbox" checked>
-                        <span>I agree to the <a href="#">terms and conditions</a></span>
-                    </label>
-                </div>
-                <div class="form-row" style="text-align:center">
-                    <input type="button" id="btnRegister" value="註冊"/>
+                <div class="panel-body">
+                    <form id="FormRegister" method="post" class="form-horizontal" action="">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="Account">@Html.LabelFor(m => m.Account)</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(m => m.Account, new { @class = "form-control", placeholder = "帳號" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="Name">@Html.LabelFor(m => m.Name)</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "姓名" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="Email">@Html.LabelFor(m => m.Email)</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="Password">@Html.LabelFor(m => m.Password)</label>
+                            <div class="col-sm-5">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "密碼" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="ConfirmPassword">@Html.LabelFor(m => m.ConfirmPassword)</label>
+                            <div class="col-sm-5">
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "確認密碼" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-5 col-sm-offset-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="agree" name="agree" value="agree" />
+                                        <span>請同意 <a href="#" onclick="ShowPrivacyPolicy()">隱私權政策</a></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-9 col-sm-offset-4">
+                                <button type="button" class="btn btn-primary" id="btnRegister">註冊</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 </div>

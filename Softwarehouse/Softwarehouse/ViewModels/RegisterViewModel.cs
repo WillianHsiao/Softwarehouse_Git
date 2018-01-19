@@ -7,18 +7,16 @@ namespace Softwarehouse.ViewModels
     /// </summary>
     public class RegisterViewModel
     {
-        [Display(Name = "姓名"), Required]
+        [Display(Name = "姓名")]
         public string Name { get; set; }
-        [Display(Name = "帳號"), Required(ErrorMessage ="請輸入帳號")]
+        [Display(Name = "帳號")]
         public string Account { get; set; }
-        [Display(Name = "Email"), Required(ErrorMessage = "請輸入Email")]
-        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email")]
         public string Email { get; set; }
-        [Display(Name = "密碼"), Required(ErrorMessage = "請輸入密碼")]
+        [Display(Name = "密碼")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-        [Display(Name = "確認密碼"), Required(ErrorMessage = "請確認密碼")]
-        [Compare(nameof(Password), ErrorMessage = "與輸入的密碼不符合")]
+        [Display(Name = "確認密碼")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
     }

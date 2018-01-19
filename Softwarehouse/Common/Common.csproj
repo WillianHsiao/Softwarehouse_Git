@@ -43,22 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\FrontEndAuthAttribute.cs" />
     <Compile Include="Classes\AjaxResult.cs" />
     <Compile Include="Classes\FrontEndMemberData.cs" />
-    <Compile Include="Helpers\FrontEndMemberHelper.cs" />
-    <Compile Include="Helpers\SiteHelper.cs" />
+    <Compile Include="Enums\LoginResultEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Business\Business.csproj">
-      <Project>{0A8F5A39-4359-429F-8D09-205DD4631270}</Project>
-      <Name>Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ObjectCollection\ObjectCollection.csproj">
-      <Project>{8B8CCBDB-299F-4532-9528-90505C73EF33}</Project>
-      <Name>ObjectCollection</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

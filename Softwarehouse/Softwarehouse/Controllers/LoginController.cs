@@ -1,4 +1,4 @@
-﻿using Common.Helpers;
+﻿using Helper;
 using ObjectCollection.ServiceResults;
 using Softwarehouse.ViewModels;
 using System.Web.Mvc;
@@ -21,17 +21,16 @@ namespace Softwarehouse.Controllers
         
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel model)
         {
             LoginApiController controller = new LoginApiController();
             MemberLoginServiceResult result = controller.Login(model);
-            if (!result.Result)
+            if (result.Result)
             {
                 return RedirectToLocal(model.ReturnUrl);
             }
 
-            return View();
+            return View("Index");
         }
 
         public ActionResult SignOut()

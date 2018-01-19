@@ -4,9 +4,9 @@ namespace Softwarehouse.ViewModels
 {
     public class LoginViewModel
     {
-        [Required]
+        [Display(Name = "帳號")]
         public string Account { get; set; }
-        [DataType(DataType.Password),Required]
+        [Display(Name = "密碼")]
         public string Password { get; set; }
         public string ReturnUrl { get; set; }
     }

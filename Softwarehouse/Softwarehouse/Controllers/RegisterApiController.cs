@@ -2,11 +2,6 @@
 using ObjectCollection.ServiceConditions;
 using ObjectCollection.ServiceResults;
 using Softwarehouse.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace Softwarehouse.Controllers
@@ -35,6 +30,58 @@ namespace Softwarehouse.Controllers
             else
             {
                 result = new CreateMemberServiceResult
+                {
+                    Result = service.State,
+                    ErrorMessage = service.StateMessage
+                };
+            }
+            return result;
+        }
+        [HttpGet]
+        [Route("MemberAccountRepeat")]
+        public MemberAccountRepeatServiceResult MemberAccountRepeat(string Account)
+        {
+            MemberAccountRepeatServiceResult result;
+            MemberAccountRepeatService service = new MemberAccountRepeatService
+            {
+                Resources = new MemberAccountRepeatServiceCondition
+                {
+                    Account = Account,
+                }
+            };
+            if (service.Check())
+            {
+                result = service.Work();
+            }
+            else
+            {
+                result = new MemberAccountRepeatServiceResult()
+                {
+                    Result = service.State,
+                    ErrorMessage = service.StateMessage
+                };
+            }
+            return result;
+        }
+        [HttpGet]
+        [Route("MemberEmailRepeat")]
+        public MemberEmailRepeatServiceResult MemberEmailRepeat(string Email)
+        {
+            MemberEmailRepeatServiceResult result;
+            MemberEmailRepeatService service = new MemberEmailRepeatService
+            {
+                Resources = new MemberEmailRepeatServiceCondition
+                {
+                    Email = Email,
+                }
+            };
+            if (service.Check())
+            {
+                result = service.Work();
+            }
+            else
+            {
+                result = new MemberEmailRepeatServiceResult()
                 {
                     Result = service.State,
                     ErrorMessage = service.StateMessage
