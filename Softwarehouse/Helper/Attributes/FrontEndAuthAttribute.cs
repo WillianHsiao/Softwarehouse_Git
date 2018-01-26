@@ -1,4 +1,5 @@
 ﻿using Common.Classes;
+using Common.StringDefine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace Helper.Attributes
             List<string> allowList = new List<string> { "Login", "Error" };
             if (filterContext.Result is HttpUnauthorizedResult || (controllerName == "Authorize" && allowList.Contains(actionName)) || (string.Equals(controllerName, "Home", StringComparison.OrdinalIgnoreCase) && string.Equals(actionName, "Index", StringComparison.OrdinalIgnoreCase)))
             {
-                if (HttpContext.Current.Session[FrontEndMemberHelper.KEY_CURRENT_USER] == null)
+                if (HttpContext.Current.Session[StringDefine.KEY_CURRENT_USER] == null)
                 {
                     HttpContext.Current.Session.RemoveAll();
 
@@ -38,20 +39,20 @@ namespace Helper.Attributes
             #endregion
 
             #region 自訂 RoleID 對應 Menus 的檢查
-            if (HttpContext.Current.Session[FrontEndMemberHelper.KEY_CURRENT_USER] == null)
+            if (HttpContext.Current.Session[StringDefine.KEY_CURRENT_USER] == null)
             {
                 // 理論上這裡不該會發生
                 RedirectTo(filterContext);
                 return;
             }
 
-            string sessionVal = HttpContext.Current.Session[FrontEndMemberHelper.KEY_CURRENT_USER].ToString();
+            string sessionVal = HttpContext.Current.Session[StringDefine.KEY_CURRENT_USER].ToString();
             List<string> valContiner = sessionVal.Split('|').ToList();
             bool isNeedRedirect = false;
             if (valContiner.Count != 2)
             {
                 // Session異常
-                filterContext.HttpContext.Session.Remove(FrontEndMemberHelper.KEY_CURRENT_USER);
+                filterContext.HttpContext.Session.Remove(StringDefine.KEY_CURRENT_USER);
                 RedirectTo(filterContext);
                 return;
             }

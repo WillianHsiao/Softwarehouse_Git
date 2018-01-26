@@ -1,12 +1,15 @@
 ﻿using Business.Interfaces;
 using Business.Repositories;
 using Common.Enums;
+using Common.StringDefine;
 using ObjectCollection.RepositoryConditions;
 using ObjectCollection.ServiceConditions;
 using ObjectCollection.ServiceResults;
 using Security;
 using System;
 using System.Linq;
+using System.Web;
+using System.Web.Security;
 
 namespace Business.Services
 {
@@ -74,7 +77,12 @@ namespace Business.Services
         public MemberLoginServiceResult Work()
         {
             MembersRepository repo = new MembersRepository();
-            MemberLoginServiceResult result = new MemberLoginServiceResult();
+            MemberLoginServiceResult result = new MemberLoginServiceResult
+            {
+                ErrorMessage = "",
+                LoginResult = LoginResultEnum.LoginSuccess,
+                Result = true
+            };
             try
             {
                 Encrypt encrypt = new Encrypt();
@@ -95,6 +103,24 @@ namespace Business.Services
                         result.Result = false;
                         result.LoginResult = LoginResultEnum.PasswordError;
                         result.ErrorMessage = "";
+                    }
+                    else
+                    {
+                        bool isPersistent = false;
+
+                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
+                          1,
+                          member.Account,
+                          DateTime.Now,
+                          DateTime.Now.AddMinutes(FormsAuthentication.Timeout.TotalMinutes),
+                          isPersistent,
+                          member.Id.ToString(),
+                          FormsAuthentication.FormsCookiePath);
+
+                        string encTicket = FormsAuthentication.Encrypt(ticket);
+
+                        HttpContext.Current.Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
+                        HttpContext.Current.Session[StringDefine.KEY_CURRENT_USER] = member.Id.ToString();
                     }
                 }
             }

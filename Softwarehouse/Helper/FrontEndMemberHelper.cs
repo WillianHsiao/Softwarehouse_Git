@@ -1,6 +1,7 @@
 ﻿using Business.Models.SoftwarehouseDB;
 using Business.Repositories;
 using Common.Classes;
+using Common.StringDefine;
 using ObjectCollection.RepositoryConditions;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,6 @@ namespace Helper
 {
     public static class FrontEndMemberHelper
     {
-        public const string KEY_CURRENT_USER = "KEY_CURRENT_USER";
         /// <summary>
         /// 取得目前登入的使用者的 SystemUser 資料
         /// </summary>
@@ -20,9 +20,9 @@ namespace Helper
             {
                 if (HttpContext.Current != null && HttpContext.Current.Session != null)
                 {
-                    if (HttpContext.Current.Session[KEY_CURRENT_USER] != null)
+                    if (HttpContext.Current.Session[StringDefine.KEY_CURRENT_USER] != null)
                     {
-                        string sessionVal = HttpContext.Current.Session[KEY_CURRENT_USER].ToString();
+                        string sessionVal = HttpContext.Current.Session[StringDefine.KEY_CURRENT_USER].ToString();
 
                         string useridStr = sessionVal.Split('|')[0];
 
@@ -49,16 +49,16 @@ namespace Helper
             {
                 if (HttpContext.Current != null && HttpContext.Current.Session != null)
                 {
-                    if (HttpContext.Current.Session[KEY_CURRENT_USER] != null)
+                    if (HttpContext.Current.Session[StringDefine.KEY_CURRENT_USER] != null)
                     {
-                        string sessionVal = HttpContext.Current.Session[KEY_CURRENT_USER].ToString();
+                        string sessionVal = HttpContext.Current.Session[StringDefine.KEY_CURRENT_USER].ToString();
 
                         List<string> sessionValList = sessionVal.Split('|').ToList();
 
                         string useridStr = sessionValList[0];
 
 
-                        if (!int.TryParse(useridStr, out int tryParseIntObj) || sessionValList.Count != 2)
+                        if (!int.TryParse(useridStr, out int tryParseIntObj))
                         {
                             return null;
                         }
