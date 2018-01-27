@@ -21,6 +21,7 @@ namespace Softwarehouse.Controllers
         
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel model)
         {
             LoginApiController controller = new LoginApiController();
@@ -39,7 +40,7 @@ namespace Softwarehouse.Controllers
 
             FormsAuthentication.SignOut();
 
-            return RedirectToAction("Login");
+            return RedirectToAction("Index");
         }
 
         private ActionResult RedirectToLocal(string returnUrl)

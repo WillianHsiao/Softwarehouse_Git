@@ -85,6 +85,9 @@ namespace Business.Services
             };
             try
             {
+                // 登入時清空所有 Session 資料
+                HttpContext.Current.Session.RemoveAll();
+
                 Encrypt encrypt = new Encrypt();
                 var member = repo.Read(new MembersRepoCondition
                 {

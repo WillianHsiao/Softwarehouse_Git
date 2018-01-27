@@ -8,29 +8,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewBag.Title</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/custom/login.css">
+    <script src="~/Scripts/custom/login.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            // initialize tooltipster on form input elements
+            $('#FormLogin input').tooltipster({
+                trigger: 'custom', // default is 'hover' which is no good here
+                onlyOne: false,    // allow multiple tips to be open at a time
+                position: 'right'  // display the tips to the right of the element
+            });
             var validator = $("#FormLogin").validate({
                 rules: {
                     Account: { required: true },
                     Password: { required: true }
                 },
-                errorElement: "em",
+                // any other options & rules,
                 errorPlacement: function (error, element) {
-                    // Add the `help-block` class to the error element
-                    error.addClass("help-block");
+                    var lastError = $(element).data('lastError'),
+                        newError = $(error).text();
 
-                    if (element.prop("type") === "checkbox") {
-                        error.insertAfter(element.parent("label"));
-                    } else {
-                        error.insertAfter(element);
+                    $(element).data('lastError', newError);
+
+                    if (newError !== '' && newError !== lastError) {
+                        $(element).tooltipster('content', newError);
+                        $(element).tooltipster('show');
                     }
                 },
-                highlight: function (element, errorClass, validClass) {
-                    $(element).parents(".col-sm-5").addClass("has-error").removeClass("has-success");
-                },
-                unhighlight: function (element, errorClass, validClass) {
-                    $(element).parents(".col-sm-5").addClass("has-success").removeClass("has-error");
+                success: function (label, element) {
+                    $(element).tooltipster('hide');
                 }
             });
             $('#btnLogin').click(function () {
@@ -41,40 +47,45 @@
         });
     </script>
 </head>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-8 col-sm-offset-2">
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">登入</h3>
-                </div>
-                <div class="panel-body">
-                    <form id="FormLogin" method="post" class="form-horizontal" action="@Url.Action("Login", "Login")">
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="Account">@Html.LabelFor(m => m.Account)</label>
-                            <div class="col-sm-5">
-                                @Html.TextBoxFor(m => m.Account, new { @class = "form-control", placeholder = "帳號" })
-                            </div>
+<body class="my-login-page">
+    <section class="h-100">
+        <div class="container h-100">
+            <div class="row justify-content-md-center h-100">
+                <div class="card-wrapper">
+                    <div class="card fat">
+                        <div class="card-body">
+                            <h4 class="card-title">登入</h4>
+                            <form id="FormLogin" method="POST" action="@Url.Action("Login", "Login")">
+                                @Html.AntiForgeryToken()
+                                <div class="form-group">
+                                    <label for="Account">帳號</label>
+                                    <input id="Account" type="text" class="form-control" name="Account" placeholder="帳號" autofocus />
+                                </div>
+                                <div class="form-group">
+                                    <label for="Password">
+                                        密碼
+                                        <a href="@Url.Action("ForgetPassword", "Login")" class="float-right">
+                                            忘記密碼?
+                                        </a>
+                                    </label>
+                                    <input id="Password" type="password" class="form-control" name="Password" placeholder="密碼" data-eye autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        <input type="checkbox" name="remember"> 記住我
+                                    </label>
+                                </div>
+                                <div class="form-group no-margin">
+                                    <button type="button" class="btn btn-primary btn-block" id="btnLogin">登入</button>
+                                </div>
+                                <div class="margin-top20 text-center">
+                                    還沒有帳號? <a href="@Url.Action("Index", "Register")">註冊</a>
+                                </div>
+                            </form>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="Password">@Html.LabelFor(m => m.Password)</label>
-                            <div class="col-sm-5">
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "密碼" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-9 col-sm-offset-4">
-                                <button type="button" class="btn btn-primary" id="btnLogin">登入</button>
-                            </div>
-                        </div>
-                    </form>
-
-                    <div class="login-help">
-                        <a href="@Url.Action("Index", "Register")">註冊</a> • <a href="@Url.Action("ForgetPassword", "Login")">忘記密碼</a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
+</body>

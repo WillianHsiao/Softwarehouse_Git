@@ -7,9 +7,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="~/Content/custom/login.css">
+    <script src="~/Scripts/custom/login.js"></script>
     <title>@ViewBag.Title</title>
     <script>
         $(document).ready(function () {
+            // initialize tooltipster on form input elements
+            $('#FormRegister input').tooltipster({
+                trigger: 'custom', // default is 'hover' which is no good here
+                onlyOne: false,    // allow multiple tips to be open at a time
+                position: 'right'  // display the tips to the right of the element
+            });
             var validator = $("#FormRegister").validate({
                 rules: {
                     Account: {
@@ -57,22 +65,20 @@
                     },
                     agree:"請同意我們的隱私權政策"
                 },
-                errorElement: "em",
+                // any other options & rules,
                 errorPlacement: function (error, element) {
-                    // Add the `help-block` class to the error element
-                    error.addClass("help-block");
+                    var lastError = $(element).data('lastError'),
+                        newError = $(error).text();
 
-                    if (element.prop("type") === "checkbox") {
-                        error.insertAfter(element.parent("label"));
-                    } else {
-                        error.insertAfter(element);
+                    $(element).data('lastError', newError);
+
+                    if (newError !== '' && newError !== lastError) {
+                        $(element).tooltipster('content', newError);
+                        $(element).tooltipster('show');
                     }
                 },
-                highlight: function (element, errorClass, validClass) {
-                    $(element).parents(".col-sm-5").addClass("has-error").removeClass("has-success");
-                },
-                unhighlight: function (element, errorClass, validClass) {
-                    $(element).parents(".col-sm-5").addClass("has-success").removeClass("has-error");
+                success: function (label, element) {
+                    $(element).tooltipster('hide');
                 }
             });
             $('#btnRegister').click(function () {
@@ -93,87 +99,67 @@
                 }
             });
         });
-
-        function ShowPrivacyPolicy() {
-            BootstrapDialog.show({
-                size: BootstrapDialog.SIZE_WIDE,
-                title:"隱私權政策",
-                message: $('<div></div>').load('@Url.Action("PrivacyPolicy", "Register")'),
-                buttons: [
-                {
-                    label: '關閉',
-                    action: function (dialogItself) {
-                        dialogItself.close();
-                    }
-                }]
-            });
-        }
     </script>
 </head>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-8 col-sm-offset-2">
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">免費註冊</h3>
-                </div>
-                <div class="panel-body">
-                    <form id="FormRegister" method="post" class="form-horizontal" action="">
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="Account">@Html.LabelFor(m => m.Account)</label>
-                            <div class="col-sm-5">
-                                @Html.TextBoxFor(m => m.Account, new { @class = "form-control", placeholder = "帳號" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="Name">@Html.LabelFor(m => m.Name)</label>
-                            <div class="col-sm-5">
-                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "姓名" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="Email">@Html.LabelFor(m => m.Email)</label>
-                            <div class="col-sm-5">
-                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="Password">@Html.LabelFor(m => m.Password)</label>
-                            <div class="col-sm-5">
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "密碼" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="ConfirmPassword">@Html.LabelFor(m => m.ConfirmPassword)</label>
-                            <div class="col-sm-5">
-                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "確認密碼" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-sm-5 col-sm-offset-4">
-                                <div class="checkbox">
+<body class="my-login-page">
+    <section class="h-100">
+        <div class="container h-100">
+            <div class="row justify-content-md-center h-100">
+                <div class="card-wrapper">
+                    <div class="card fat">
+                        <div class="card-body">
+                            <h4 class="card-title">免費註冊</h4>
+                            <form id="FormRegister" method="POST">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Account)
+                                    <input id="Account" type="text" class="form-control" name="Account" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Name)
+                                    <input id="Name" type="text" class="form-control" name="Name" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Email)
+                                    <input id="Email" type="email" class="form-control" name="Email">
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Password)
+                                    <input id="Password" type="password" class="form-control" name="Password" data-eye>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.ConfirmPassword)
+                                    <input id="ConfirmPassword" type="password" class="form-control" name="ConfirmPassword" data-eye>
+                                </div>
+                                <div class="form-group">
                                     <label>
-                                        <input type="checkbox" id="agree" name="agree" value="agree" />
-                                        <span>請同意 <a href="#" onclick="ShowPrivacyPolicy()">隱私權政策</a></span>
+                                        <input type="checkbox" name="agree" value="agree">
+                                        請同意 <a href="#" data-toggle="modal" data-target="#PrivacyModal">隱私權政策</a>
                                     </label>
                                 </div>
-                            </div>
+                                <div class="form-group no-margin">
+                                    <button type="button" class="btn btn-primary btn-block" id="btnRegister">
+                                        註冊
+                                    </button>
+                                </div>
+                                <div class="margin-top20 text-center">
+                                    已經有註冊帳號了? <a href="@Url.Action("Index", "Login")">登入</a>
+                                </div>
+                            </form>
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-sm-9 col-sm-offset-4">
-                                <button type="button" class="btn btn-primary" id="btnRegister">註冊</button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
+    </section>
+</body>
+
+<!-- Modal -->
+<div class="modal fade" id="PrivacyModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content text-left">
+            @Html.Partial("PrivacyPolicy")
+        </div>
+
     </div>
 </div>
