@@ -44,20 +44,26 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
                     </li>
+
+                    @{if (Helper.SiteHelper.IsLogin())
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="MemberManageMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @Helper.FrontEndMemberHelper.CurrentMemberData.Name
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="MemberManageMenuLink">
+                                    <a class="dropdown-item" href="#">會員中心</a>
+                                    <a class="dropdown-item" href="@Url.Action("SignOut", "Login")">登出</a>
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Login")">登入</a>
+                            </li>
+                        } }
                 </ul>
-                @{if (Helper.SiteHelper.IsLogin())
-                    {
-                        <div>
-                            歡迎, @Helper.FrontEndMemberHelper.CurrentMemberData.Account
-                            <a href="@Url.Action("SignOut", "Login")">登出</a>
-                        </div>
-                    }
-                    else
-                    {
-                        <div>
-                            <a href="@Url.Action("Index", "Login")">登入</a>
-                        </div>
-                    } }
             </div>
         </div>
     </nav>

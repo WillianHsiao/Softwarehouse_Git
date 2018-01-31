@@ -88,6 +88,7 @@ namespace Business.Services
                 {
                     Account = _Resource.Account,
                     Password = encrypt.EncryptSHA512(_Resource.Password, salt),
+                    Name = _Resource.Name,
                     Email = _Resource.Email,
                     SaltString = salt
                 });

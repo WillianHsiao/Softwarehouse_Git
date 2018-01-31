@@ -73,7 +73,8 @@ namespace Helper
                             {
                                 Id = p.Id,
                                 Account = p.Account,
-                                Email = p.Email
+                                Email = p.Email,
+                                Name = p.Name
                             }).FirstOrDefault();
                         }
                         return result;

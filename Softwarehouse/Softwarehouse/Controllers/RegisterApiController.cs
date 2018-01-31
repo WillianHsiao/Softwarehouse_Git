@@ -20,7 +20,8 @@ namespace Softwarehouse.Controllers
                 {
                     Account = model.Account,
                     Password = model.Password,
-                    Email = model.Email
+                    Email = model.Email,
+                    Name = model.Name
                 }
             };
             if (service.Check())

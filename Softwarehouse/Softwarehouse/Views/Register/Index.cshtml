@@ -12,11 +12,15 @@
     <title>@ViewBag.Title</title>
     <script>
         $(document).ready(function () {
-            // initialize tooltipster on form input elements
-            $('#FormRegister input').tooltipster({
+            $('#FormRegister input:not([type="checkbox"])').tooltipster({
                 trigger: 'custom', // default is 'hover' which is no good here
                 onlyOne: false,    // allow multiple tips to be open at a time
                 position: 'right'  // display the tips to the right of the element
+            });
+            $('#FormRegister input[type="checkbox"]').tooltipster({
+                trigger: 'custom', // default is 'hover' which is no good here
+                onlyOne: false,    // allow multiple tips to be open at a time
+                position: 'bottom'  // display the tips to the right of the element
             });
             var validator = $("#FormRegister").validate({
                 rules: {
@@ -154,7 +158,7 @@
 </body>
 
 <!-- Modal -->
-<div class="modal fade" id="PrivacyModal" role="dialog">
+<div class="modal fade" id="PrivacyModal" role="dialog" style="z-index:99999999">
     <div class="modal-dialog modal-lg">
         <!-- Modal content-->
         <div class="modal-content text-left">

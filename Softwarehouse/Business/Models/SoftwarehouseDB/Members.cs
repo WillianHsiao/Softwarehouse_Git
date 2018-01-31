@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Business.Models.SoftwarehouseDB
 {
-    //[Table("MemberData")]
+    [Table("Members")]
     public partial class Members
     {
         public Members()
@@ -25,6 +25,9 @@ namespace Business.Models.SoftwarehouseDB
 
         [Column("Password")]
         public string Password { get; set; }
+
+        [Column("Name")]
+        public string Name { get; set; }
 
         [Column("Email")]
         public string Email { get; set; }
