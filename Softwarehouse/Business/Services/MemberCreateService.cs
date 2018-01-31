@@ -8,13 +8,13 @@ using System;
 
 namespace Business.Services
 {
-    public class CreateMemberService : IService<CreateMemberServiceCondition, CreateMemberServiceResult>
+    public class MemberCreateService : IService<MemberCreateServiceCondition, CreateMemberServiceResult>
     {
         /// <summary>
         /// 商業邏輯傳遞參數
         /// </summary>
-        private CreateMemberServiceCondition _Resource;
-        public CreateMemberServiceCondition Resources
+        private MemberCreateServiceCondition _Resource;
+        public MemberCreateServiceCondition Resources
         {
             get { return _Resource; }
             set { _Resource = value; }

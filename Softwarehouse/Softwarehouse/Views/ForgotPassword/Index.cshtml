@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "註冊帳號";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="~/Content/custom/login.css">
+    <script src="~/Scripts/custom/login.js"></script>
+    <title>@ViewBag.Title</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#FormForgotPassword input').tooltipster({
+                trigger: 'custom', // default is 'hover' which is no good here
+                onlyOne: false,    // allow multiple tips to be open at a time
+                position: 'right'  // display the tips to the right of the element
+            });
+            var validator = $("#FormForgotPassword").validate({
+                rules: {
+                    Email: {
+                        required: true,
+                        email: true,
+                        remote: {
+                            url: '@Url.Action("CheckEmailAddress", "ForgotPassword")',
+                            type: 'Get',
+                            data: {
+                                Email: function () {
+                                    return $("#Email").val();
+                                }
+                            }
+                        }
+                    }
+                },
+                messages: {
+                    Email: {
+                        remote: "查無此電子信箱"
+                    }
+                },
+                // any other options & rules,
+                errorPlacement: function (error, element) {
+                    var lastError = $(element).data('lastError'),
+                        newError = $(error).text();
+
+                    $(element).data('lastError', newError);
+
+                    if (newError !== '' && newError !== lastError) {
+                        $(element).tooltipster('content', newError);
+                        $(element).tooltipster('show');
+                    }
+                },
+                success: function (label, element) {
+                    $(element).tooltipster('hide');
+                }
+            });
+            $('#btnResetPassword').click(function () {
+                if ($("#FormForgotPassword").valid()) {
+                    $('#FormForgotPassword').submit();
+                }
+            });
+        });
+    </script>
+</head>
+
+<body class="my-login-page">
+    <section class="h-100">
+        <div class="container h-100">
+            <div class="row justify-content-md-center align-items-center h-100">
+                <div class="card-wrapper">
+                    <div class="card fat">
+                        <div class="card-body">
+                            <h4 class="card-title">忘記密碼</h4>
+                            <form id="FormForgotPassword" method="POST" action="@Url.Action("ResetPassword", "ForgotPassword")">
+                                <div class="form-group">
+                                    <label for="Email">電子郵件</label>
+                                    <input id="Email" type="email" class="form-control" name="Email" value="" autofocus>
+                                    <div class="form-text text-muted">
+                                        點擊「重新設定密碼」將會發送重新設定郵件
+                                    </div>
+                                </div>
+                                <div class="form-group no-margin">
+                                    <button type="button" id="btnResetPassword" class="btn btn-primary btn-block">
+                                        重新設定密碼
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

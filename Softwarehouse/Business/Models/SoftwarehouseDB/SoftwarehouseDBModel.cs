@@ -11,18 +11,22 @@ namespace Business.Models.SoftwarehouseDB
         }
 
         /// <summary>
-        /// AdminUsers
+        /// 後台管理者
         /// </summary>
         public virtual DbSet<AdminUsers> AdminUsers { get; set; }
         /// <summary>
-        /// VipUsers
+        /// 付費會員
         /// </summary>
         public virtual DbSet<VipUsers> VipUsers { get; set; }
         /// <summary>
-        /// Members
+        /// 會員
         /// </summary>
         public virtual DbSet<Members> Members { get; set; }
 
+        /// <summary>
+        /// 重設密碼清單
+        /// </summary>
+        public virtual DbSet<MemberResetPassword> MemberResetPasswords { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

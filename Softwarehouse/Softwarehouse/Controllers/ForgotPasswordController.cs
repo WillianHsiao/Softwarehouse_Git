@@ -13,5 +13,14 @@ namespace Softwarehouse.Controllers
         {
             return View();
         }
+        public JsonResult CheckEmailAddress(string Email)
+        {
+            return Json(new RegisterApiController().MemberEmailRepeat(Email).IsRepeat,
+                JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ResetPassword(string Email)
+        {
+            return View("Index", "ForgotPassword");
+        }
     }
 }

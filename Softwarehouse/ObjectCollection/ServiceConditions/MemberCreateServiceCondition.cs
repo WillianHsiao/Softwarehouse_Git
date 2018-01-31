@@ -1,6 +1,6 @@
 ﻿namespace ObjectCollection.ServiceConditions
 {
-    public class CreateMemberServiceCondition
+    public class MemberCreateServiceCondition
     {
         public string Account { get; set; }
         public string Name { get; set; }

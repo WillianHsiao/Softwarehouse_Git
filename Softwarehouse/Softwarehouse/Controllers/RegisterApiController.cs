@@ -14,9 +14,9 @@ namespace Softwarehouse.Controllers
         public CreateMemberServiceResult MemberRegister([FromBody]RegisterViewModel model)
         {
             CreateMemberServiceResult result;
-            CreateMemberService service = new CreateMemberService
+            MemberCreateService service = new MemberCreateService
             {
-                Resources = new CreateMemberServiceCondition
+                Resources = new MemberCreateServiceCondition
                 {
                     Account = model.Account,
                     Password = model.Password,

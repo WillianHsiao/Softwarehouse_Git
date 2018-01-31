@@ -45,11 +45,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryConditions\AdminUsersRepoCondition.cs" />
     <Compile Include="RepositoryConditions\MembersRepoCondition.cs" />
+    <Compile Include="RepositoryConditions\MemberResetPasswordRepoCondition.cs" />
     <Compile Include="RepositoryConditions\VipUsersRepoCondition.cs" />
-    <Compile Include="ServiceConditions\CreateMemberServiceCondition.cs" />
+    <Compile Include="ServiceConditions\MemberCreateServiceCondition.cs" />
     <Compile Include="ServiceConditions\MemberAccountRepeatServiceCondition.cs" />
     <Compile Include="ServiceConditions\MemberEmailRepeatServiceCondition.cs" />
     <Compile Include="ServiceConditions\MemberLoginServiceCondition.cs" />
+    <Compile Include="ServiceConditions\MemberResetPasswordServiceCondition.cs" />
     <Compile Include="ServiceResults\CreateMemberServiceResult.cs" />
     <Compile Include="ServiceResults\MemberAccountRepeatServiceResult.cs" />
     <Compile Include="ServiceResults\MemberEmailRepeatServiceResult.cs" />
