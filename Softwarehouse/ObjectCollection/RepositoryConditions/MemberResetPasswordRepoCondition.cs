@@ -4,6 +4,6 @@
     {
         public int Id { get; set; }
         public string MemberAccount { get; set; }
-        public string RandomString { get; set; }
+        public string UniqueKey { get; set; }
     }
 }

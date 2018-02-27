@@ -13,7 +13,10 @@ namespace Business.Models.SoftwarehouseDB
         [Column("MemberAccount")]
         public string MemberAccount { get; set; }
 
-        [Column("RandomString")]
-        public string RandomString { get; set; }
+        [Column("UniqueKey")]
+        public string UniqueKey { get; set; }
+
+        [Column("SaltString")]
+        public string SaltString { get; set; }
     }
 }

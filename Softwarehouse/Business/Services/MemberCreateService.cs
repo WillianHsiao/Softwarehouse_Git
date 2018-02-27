@@ -81,13 +81,12 @@ namespace Business.Services
             CreateMemberServiceResult result = new CreateMemberServiceResult();
             try
             {
-                Encrypt encrypt = new Encrypt();
                 RandomSalt randomSalt = new RandomSalt();
                 var salt = randomSalt.GetRandomSaltString();
                 repo.Create(new Members
                 {
                     Account = _Resource.Account,
-                    Password = encrypt.EncryptSHA512(_Resource.Password, salt),
+                    Password = Encrypt.EncryptSHA512(_Resource.Password, salt),
                     Name = _Resource.Name,
                     Email = _Resource.Email,
                     SaltString = salt

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using ObjectCollection.ServiceResults;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Softwarehouse.Controllers
@@ -18,9 +16,15 @@ namespace Softwarehouse.Controllers
             return Json(new RegisterApiController().MemberEmailRepeat(Email).IsRepeat,
                 JsonRequestBehavior.AllowGet);
         }
-        public ActionResult ResetPassword(string Email)
+        public async Task<ActionResult> SendResetPasswordEmail(string Email)
         {
-            return View("Index", "ForgotPassword");
+            ForgotPasswordApiController controller = new ForgotPasswordApiController();
+            MemberSendResetPasswordEmailServiceResult result = await controller.SendResetPasswordEmail(Email);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ResetPassword(string UniqueKey)
+        {
+            return View();
         }
     }
 }

@@ -35,7 +35,7 @@ namespace Business.Repositories
         {
             try
             {
-                var result = db.MemberResetPasswords.Add(content);
+                var result = db.MemberResetPassword.Add(content);
                 db.SaveChanges();
                 State = true;
                 return result.Id;
@@ -51,7 +51,7 @@ namespace Business.Repositories
         {
             try
             {
-                var result = from t in db.MemberResetPasswords
+                var result = from t in db.MemberResetPassword
                              where t.Id == key
                              select t;
                 State = true;
@@ -68,7 +68,7 @@ namespace Business.Repositories
         {
             try
             {
-                var result = from t in db.MemberResetPasswords
+                var result = from t in db.MemberResetPassword
                              select t;
                 if (!string.IsNullOrWhiteSpace(condition.MemberAccount))
                 {
@@ -95,7 +95,7 @@ namespace Business.Repositories
                     return null;
                 }
                 source.MemberAccount = condition.MemberAccount;
-                source.RandomString = condition.RandomString;
+                source.UniqueKey = condition.UniqueKey;
 
                 db.SaveChanges();
                 State = true;

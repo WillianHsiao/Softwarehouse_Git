@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ObjectCollection.ServiceConditions
 {
-    public class MemberResetPasswordServiceCondition
+    public class MemberSendResetPasswordEmailServiceCondition
     {
-        public string UniqueKey { get; set; }
+        public string Email { get; set; }
     }
 }

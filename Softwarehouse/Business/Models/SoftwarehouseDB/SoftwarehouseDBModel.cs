@@ -26,7 +26,7 @@ namespace Business.Models.SoftwarehouseDB
         /// <summary>
         /// 重設密碼清單
         /// </summary>
-        public virtual DbSet<MemberResetPassword> MemberResetPasswords { get; set; }
+        public virtual DbSet<MemberResetPassword> MemberResetPassword { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

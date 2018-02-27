@@ -57,7 +57,19 @@
             });
             $('#btnResetPassword').click(function () {
                 if ($("#FormForgotPassword").valid()) {
-                    $('#FormForgotPassword').submit();
+                    $.ajax({
+                        url: '@Url.Action("SendResetPasswordEmail", "ForgotPassword")',
+                        type: 'Post',
+                        data: { Email: $('#Email').val() },
+                        success: function (serviceResult) {
+                            if (serviceResult.Result) {
+                                alert('電子郵件發送成功');
+                            }
+                            else {
+                                alert(serviceResult.ErrorMessage);
+                            }
+                        }
+                    });
                 }
             });
         });
@@ -72,7 +84,7 @@
                     <div class="card fat">
                         <div class="card-body">
                             <h4 class="card-title">忘記密碼</h4>
-                            <form id="FormForgotPassword" method="POST" action="@Url.Action("ResetPassword", "ForgotPassword")">
+                            <form id="FormForgotPassword" method="POST">
                                 <div class="form-group">
                                     <label for="Email">電子郵件</label>
                                     <input id="Email" type="email" class="form-control" name="Email" value="" autofocus>

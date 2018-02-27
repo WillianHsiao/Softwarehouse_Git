@@ -87,8 +87,7 @@ namespace Business.Services
             {
                 // 登入時清空所有 Session 資料
                 HttpContext.Current.Session.RemoveAll();
-
-                Encrypt encrypt = new Encrypt();
+                
                 var member = repo.Read(new MembersRepoCondition
                 {
                     Account = _Resource.Account
@@ -101,7 +100,7 @@ namespace Business.Services
                 }
                 else
                 {
-                    if(member.Password != encrypt.EncryptSHA512(_Resource.Password, member.SaltString))
+                    if(member.Password != Encrypt.EncryptSHA512(_Resource.Password, member.SaltString))
                     {
                         result.Result = false;
                         result.LoginResult = LoginResultEnum.PasswordError;
