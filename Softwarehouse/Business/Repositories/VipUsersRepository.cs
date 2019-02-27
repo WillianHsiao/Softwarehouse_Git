@@ -47,28 +47,6 @@ namespace Business.Repositories
             }
         }
 
-        public int Delete(VipUsersRepoCondition condition)
-        {
-            try
-            {
-                var source = Get(condition.Id);
-                if (source == null)
-                {
-                    State = false;
-                    return 0;
-                }
-
-                db.SaveChanges();
-                State = true;
-                return condition.Id;
-            }
-            catch (Exception e)
-            {
-                State = false;
-                throw e;
-            }
-        }
-
         public VipUsers Get(int key)
         {
             try
@@ -132,8 +110,48 @@ namespace Business.Repositories
         {
             throw new NotImplementedException();
         }
+        public bool Delete(int key)
+        {
+            try
+            {
+                var source = Get(key);
+                if (source == null)
+                {
+                    State = false;
+                }
 
+                db.SaveChanges();
+                State = true;
+            }
+            catch (Exception e)
+            {
+                State = false;
+                throw e;
+            }
+            return State;
+        }
+        public bool DeleteAll(VipUsersRepoCondition condition)
+        {
+            try
+            {
+                var source = Read(condition);
+                if (source == null)
+                {
+                    State = false;
+                    return State;
+                }
+                db.VipUsers.RemoveRange(source);
 
+                db.SaveChanges();
+                State = true;
+            }
+            catch (Exception e)
+            {
+                State = false;
+                throw e;
+            }
+            return State;
+        }
         public void Dispose()
         {
             if (db != null)

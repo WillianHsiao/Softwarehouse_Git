@@ -8,6 +8,7 @@ namespace ObjectCollection.ServiceConditions
 {
     public class MemberResetPasswordServiceCondition
     {
-        public string UniqueKey { get; set; }
+        public string MemberAccount { get; set; }
+        public string NewPassword { get; set; }
     }
 }

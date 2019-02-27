@@ -70,6 +70,10 @@ namespace Business.Repositories
             {
                 var result = from t in db.Members
                              select t;
+                if(condition.Id != 0)
+                {
+                    result = result.Where(r => r.Id == condition.Id);
+                }
                 if (!string.IsNullOrWhiteSpace(condition.Account))
                 {
                     result = result.Where(r => r.Account == condition.Account);
@@ -102,9 +106,22 @@ namespace Business.Repositories
                     State = false;
                     return null;
                 }
-                source.Account = condition.Account;
-                source.Password = condition.Password;
-                source.Email = condition.Email;
+                if(!string.IsNullOrWhiteSpace(condition.Account))
+                {
+                    source.Account = condition.Account;
+                }
+                if (!string.IsNullOrWhiteSpace(condition.Password))
+                {
+                    source.Password = condition.Password;
+                }
+                if (!string.IsNullOrWhiteSpace(condition.SaltString))
+                {
+                    source.SaltString = condition.SaltString;
+                }
+                if (!string.IsNullOrWhiteSpace(condition.Email))
+                {
+                    source.Email = condition.Email;
+                }
 
                 db.SaveChanges();
                 State = true;
@@ -121,27 +138,48 @@ namespace Business.Repositories
         {
             throw new NotImplementedException();
         }
-
-        public int Delete(MembersRepoCondition condition)
+        public bool Delete(int key)
         {
             try
             {
-                var source = Get(condition.Id);
+                var source = Get(key);
                 if (source == null)
                 {
                     State = false;
-                    return 0;
                 }
+                db.Members.Remove(source);
 
                 db.SaveChanges();
                 State = true;
-                return condition.Id;
             }
             catch (Exception e)
             {
                 State = false;
                 throw e;
             }
+            return State;
+        }
+        public bool DeleteAll(MembersRepoCondition condition)
+        {
+            try
+            {
+                var source = Read(condition);
+                if (source == null)
+                {
+                    State = false;
+                    return State;
+                }
+                db.Members.RemoveRange(source);
+
+                db.SaveChanges();
+                State = true;
+            }
+            catch (Exception e)
+            {
+                State = false;
+                throw e;
+            }
+            return State;
         }
 
         public void Dispose()

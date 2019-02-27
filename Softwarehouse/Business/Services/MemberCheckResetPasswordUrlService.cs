@@ -9,13 +9,13 @@ using System.Linq;
 
 namespace Business.Services
 {
-    public class MemberResetPasswordService : IService<MemberResetPasswordServiceCondition, MemberResetPasswordServiceResult>
+    public class MemberCheckResetPasswordUrlService : IService<MemberCheckResetPasswordUrlServiceCondition, MemberCheckResetPasswordUrlServiceResult>
     {
         /// <summary>
         /// 商業邏輯傳遞參數
         /// </summary>
-        private MemberResetPasswordServiceCondition _Resource;
-        public MemberResetPasswordServiceCondition Resources
+        private MemberCheckResetPasswordUrlServiceCondition _Resource;
+        public MemberCheckResetPasswordUrlServiceCondition Resources
         {
             get { return _Resource; }
             set { _Resource = value; }
@@ -57,9 +57,9 @@ namespace Business.Services
                 this.State = false;
                 return false;
             }
-            if (string.IsNullOrWhiteSpace(_Resource.NewPassword))
+            if (string.IsNullOrWhiteSpace(_Resource.UniqueKey))
             {
-                this.StateMessage = "請傳入NewPassword";
+                this.StateMessage = "請傳入UniqueKey";
                 this.State = false;
                 return false;
             }
@@ -70,35 +70,31 @@ namespace Business.Services
         /// 執行商業邏輯
         /// </summary>
         /// <returns></returns>
-        public MemberResetPasswordServiceResult Work()
+        public MemberCheckResetPasswordUrlServiceResult Work()
         {
             MemberResetPasswordRepository repo = new MemberResetPasswordRepository();
-            MembersRepository membersRepo = new MembersRepository();
-            MemberResetPasswordServiceResult result = new MemberResetPasswordServiceResult();
+            MemberCheckResetPasswordUrlServiceResult result = new MemberCheckResetPasswordUrlServiceResult();
             try
             {
-                var member = membersRepo.Read(new MembersRepoCondition
+                var MemberResetPasswords = repo.Read(new MemberResetPasswordRepoCondition
                 {
-                    Account = _Resource.MemberAccount
-                }).FirstOrDefault();
-                RandomSalt randomSalt = new RandomSalt();
-                var salt = randomSalt.GetRandomSaltString();
-                membersRepo.Update(new MembersRepoCondition
-                {
-                    Id= member.Id,
-                    Password = Encrypt.EncryptSHA512(_Resource.NewPassword, salt),
-                    SaltString = salt
+                    MemberAccount = _Resource.MemberAccount
                 });
-                if (membersRepo.State)
+                bool UniqueKeyEffective = false;
+                MemberResetPasswords.ToList().ForEach(p =>
                 {
-                    result.Result = repo.DeleteAll(new MemberResetPasswordRepoCondition
+                    if(Encrypt.EncryptSHA512(Encrypt.AESDecrypt(_Resource.UniqueKey), p.SaltString) == p.UniqueKey)
                     {
-                        MemberAccount = _Resource.MemberAccount
-                    });
+                        UniqueKeyEffective = true;
+                    }
+                });
+                if (UniqueKeyEffective)
+                {
+                    result.Result = true;
                 }
                 else
                 {
-                    throw new Exception("重設密碼失敗");
+                    throw new Exception("參數驗證錯誤");
                 }
             }
             catch (Exception ex)

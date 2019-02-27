@@ -99,10 +99,11 @@ namespace Business.Services
                         new EmailAddress(Member.Email, Member.Name)
                     };
                     var subject = "變更密碼";
-                    var htmlContent = HttpContext.Current.Request.Url.Scheme + 
+                    var htmlContent = HttpContext.Current.Request.Url.Scheme +
                         "://" +
-                        HttpContext.Current.Request.Url.Host + 
-                        "/ForgotPassword/ResetPassword?UniqueKey=" + 
+                        HttpContext.Current.Request.Url.Host +
+                        "/ForgotPassword/ResetPassword?MemberAccount=" + Member.Account +
+                        "&UniqueKey=" +
                         Encrypt.AESEncrypt(UniqueKey);
                     var displayRecipients = false; // set this to true if you want recipients to see each others mail id 
                     var msg = MailHelper.CreateSingleEmailToMultipleRecipients(from, tos, subject, "", htmlContent, displayRecipients);

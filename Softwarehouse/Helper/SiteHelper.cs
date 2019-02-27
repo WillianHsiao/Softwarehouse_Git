@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using Common.StringDefine;
+using System.Web;
 
 namespace Helper
 {
@@ -6,14 +7,7 @@ namespace Helper
     {
         public static bool IsLogin()
         {
-            if (HttpContext.Current.Request.IsAuthenticated)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return HttpContext.Current.Request.IsAuthenticated && HttpContext.Current.Session[StringDefine.KEY_CURRENT_USER] != null;
         }
 
         public static string ProjectTitle

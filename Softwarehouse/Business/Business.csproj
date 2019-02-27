@@ -72,6 +72,7 @@
     <Compile Include="Repositories\MemberResetPasswordRepository.cs" />
     <Compile Include="Repositories\VipUsersRepository.cs" />
     <Compile Include="Services\MemberAccountRepeatService.cs" />
+    <Compile Include="Services\MemberCheckResetPasswordUrlService.cs" />
     <Compile Include="Services\MemberCreateService.cs" />
     <Compile Include="Services\MemberEmailRepeatService.cs" />
     <Compile Include="Services\MemberLoginService.cs" />

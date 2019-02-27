@@ -110,28 +110,48 @@ namespace Business.Repositories
             throw new NotImplementedException();
         }
 
-        public int Delete(AdminUsersRepoCondition condition)
+        public bool Delete(int key)
         {
             try
             {
-                var source = Get(condition.Id);
+                var source = Get(key);
                 if (source == null)
                 {
                     State = false;
-                    return 0;
                 }
 
                 db.SaveChanges();
                 State = true;
-                return condition.Id;
             }
             catch (Exception e)
             {
                 State = false;
                 throw e;
             }
+            return State;
         }
+        public bool DeleteAll(AdminUsersRepoCondition condition)
+        {
+            try
+            {
+                var source = Read(condition);
+                if (source == null)
+                {
+                    State = false;
+                    return State;
+                }
+                db.AdminUsers.RemoveRange(source);
 
+                db.SaveChanges();
+                State = true;
+            }
+            catch (Exception e)
+            {
+                State = false;
+                throw e;
+            }
+            return State;
+        }
         public void Dispose()
         {
             if (db != null)

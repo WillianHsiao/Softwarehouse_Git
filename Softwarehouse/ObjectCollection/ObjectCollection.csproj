@@ -47,6 +47,7 @@
     <Compile Include="RepositoryConditions\MembersRepoCondition.cs" />
     <Compile Include="RepositoryConditions\MemberResetPasswordRepoCondition.cs" />
     <Compile Include="RepositoryConditions\VipUsersRepoCondition.cs" />
+    <Compile Include="ServiceConditions\MemberCheckResetPasswordUrlServiceCondition.cs" />
     <Compile Include="ServiceConditions\MemberCreateServiceCondition.cs" />
     <Compile Include="ServiceConditions\MemberAccountRepeatServiceCondition.cs" />
     <Compile Include="ServiceConditions\MemberEmailRepeatServiceCondition.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="ServiceConditions\MemberSendResetPasswordEmailServiceCondition.cs" />
     <Compile Include="ServiceResults\CreateMemberServiceResult.cs" />
     <Compile Include="ServiceResults\MemberAccountRepeatServiceResult.cs" />
+    <Compile Include="ServiceResults\MemberCheckResetPasswordUrlServiceResult.cs" />
     <Compile Include="ServiceResults\MemberEmailRepeatServiceResult.cs" />
     <Compile Include="ServiceResults\MemberLoginServiceResult.cs" />
     <Compile Include="ServiceResults\MemberResetPasswordServiceResult.cs" />

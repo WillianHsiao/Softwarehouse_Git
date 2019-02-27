@@ -49,8 +49,14 @@ namespace Business.Interfaces
         /// 刪除
         /// </summary>
         /// <param name="condition">條件</param>
-        /// <returns>索引值</returns>
-        TKey Delete(TCondition condition);
+        /// <returns>結果成功失敗</returns>
+        bool Delete(TKey key);
+        /// <summary>
+        /// 批量刪除
+        /// </summary>
+        /// <param name="condition"></param>
+        /// <returns>結果成功失敗</returns>
+        bool DeleteAll(TCondition condition);
     }
 
     /// <summary>

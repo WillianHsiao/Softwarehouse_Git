@@ -74,6 +74,10 @@ namespace Business.Repositories
                 {
                     result = result.Where(r => r.MemberAccount == condition.MemberAccount);
                 }
+                if (!string.IsNullOrWhiteSpace(condition.UniqueKey))
+                {
+                    result = result.Where(r => r.UniqueKey == condition.UniqueKey);
+                }
                 State = true;
                 return result;
             }
@@ -113,26 +117,47 @@ namespace Business.Repositories
             throw new NotImplementedException();
         }
 
-        public int Delete(MemberResetPasswordRepoCondition condition)
+        public bool Delete(int key)
         {
             try
             {
-                var source = Get(condition.Id);
+                var source = Get(key);
                 if (source == null)
                 {
                     State = false;
-                    return 0;
                 }
 
                 db.SaveChanges();
                 State = true;
-                return condition.Id;
             }
             catch (Exception e)
             {
                 State = false;
                 throw e;
             }
+            return State;
+        }
+        public bool DeleteAll(MemberResetPasswordRepoCondition condition)
+        {
+            try
+            {
+                var source = Read(condition);
+                if (source == null)
+                {
+                    State = false;
+                    return State;
+                }
+                db.MemberResetPassword.RemoveRange(source);
+
+                db.SaveChanges();
+                State = true;
+            }
+            catch (Exception e)
+            {
+                State = false;
+                throw e;
+            }
+            return State;
         }
 
         public void Dispose()
